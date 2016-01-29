@@ -1,0 +1,11 @@
+--- configure.in.orig	2016-01-29 16:55:39.033649624 +0100
++++ configure.in	2016-01-29 16:55:59.817503599 +0100
+@@ -490,7 +490,7 @@
+     VERSION_OPT=''
+   fi
+ 
+-  LINK_SHARED="$LD"' -o $$@ -soname libtecla$$(SUFFIX).so.'${MAJOR_VER}' -shared '$VERSION_OPT' $$(LIB_OBJECTS) $$(LIBS) -lc'
++  LINK_SHARED="$LD"' -o $$@ --build-id -soname libtecla$$(SUFFIX).so.'${MAJOR_VER}' -shared '$VERSION_OPT' $$(LIB_OBJECTS) $$(LIBS) -lc'
+   SHARED_CFLAGS="-fpic"
+ 
+ dnl Reenable the inclusion of symbols which get undefined when POSIX_C_SOURCE
