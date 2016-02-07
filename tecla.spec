@@ -71,7 +71,7 @@ rm $RPM_BUILD_ROOT%{_mandir}/man1/enhance.1
 %defattr(-,root,root,-)
 %doc CHANGES README RELEASE.NOTES
 %license LICENSE.TERMS
-%{_mandir}
+%{_mandir}/*/*
 %{_libdir}/libtecla.so.*
 %{_libdir}/libtecla_r.so.*
 
