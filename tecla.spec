@@ -1,17 +1,17 @@
 Name:		tecla
 Version:	1.6.3
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Tecla provides interactive command line editing facilities.
 
 Group:		System Environment/Libraries
 License:	MIT
 URL:		http://www.astro.caltech.edu/~mcs/tecla/index.html
 Source0:	http://www.astro.caltech.edu/~mcs/tecla/libtecla-%{version}.tar.gz
-Patch0:		configure-in-build-id.patch
+Patch0:		configure-build-id.patch
+Patch1:		Makefile-rules-no-rpath.patch
 
-BuildRequires:	autoconf
 BuildRequires:	ncurses-devel
-BuildRequires:	chrpath
+Requires:	ncurses-libs
 
 %description
 The tecla library provides UNIX and LINUX programs with interactive command
@@ -50,10 +50,10 @@ The tecla-static package contains the static version of the tecla library.
 %prep
 %setup -q -n libtecla
 %patch0 -p0
+%patch1 -p0
 
 
 %build
-autoconf
 %configure
 make %{?_smp_mflags}
 
@@ -61,16 +61,12 @@ make %{?_smp_mflags}
 %install
 %make_install LIBDIR=$RPM_BUILD_ROOT%{_libdir} INCDIR=$RPM_BUILD_ROOT%{_includedir} MANDIR=$RPM_BUILD_ROOT%{_mandir} BINDIR=$RPM_BUILD_ROOT%{_bindir}
 
-# I can't get the enhance binary to build without RPM_BUILD_ROOT embedded
-# inside it, so we remove it for now.
-rm $RPM_BUILD_ROOT%{_bindir}/enhance
-rm $RPM_BUILD_ROOT%{_mandir}/man1/enhance.1
-
 
 %files
 %defattr(-,root,root,-)
 %doc CHANGES README RELEASE.NOTES
 %license LICENSE.TERMS
+%{_bindir}/enhance
 %{_mandir}/*/*
 %{_libdir}/libtecla.so.*
 %{_libdir}/libtecla_r.so.*
@@ -88,5 +84,9 @@ rm $RPM_BUILD_ROOT%{_mandir}/man1/enhance.1
 
 
 %changelog
+* Mon Sep 19 2016 Jeremy Lin <jeremy.lin@gmail.com> - 1.6.3-2
+- Include `enhance` utility
+- Minimize build dependencies
+
 * Fri Jan 29 2016 Adrien Bustany <adrien@bustany.org> 1.6.3-1
 - Initial packaging
