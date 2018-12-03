@@ -10,6 +10,7 @@ Source0:	http://www.astro.caltech.edu/~mcs/tecla/libtecla-%{version}.tar.gz
 Patch0:		configure-build-id.patch
 Patch1:		Makefile-rules-no-rpath.patch
 
+BuildRequires:	gcc
 BuildRequires:	ncurses-devel
 Requires:	ncurses-libs
 
@@ -84,6 +85,9 @@ make %{?_smp_mflags}
 
 
 %changelog
+* Mon Dec 03 2018 Adrien Bustany <adrien@bustany.org> - 1.6.3-3
+- Include gcc in BuildRequires, since Fedora 29 removed it from buildroot.
+
 * Mon Sep 19 2016 Jeremy Lin <jeremy.lin@gmail.com> - 1.6.3-2
 - Include `enhance` utility
 - Minimize build dependencies
