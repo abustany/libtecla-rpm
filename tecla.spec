@@ -1,6 +1,6 @@
 Name:		tecla
 Version:	1.6.3
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	Tecla provides interactive command line editing facilities.
 
 Group:		System Environment/Libraries
